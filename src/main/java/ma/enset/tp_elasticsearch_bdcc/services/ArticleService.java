@@ -20,27 +20,4 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
-    public Article updateArticle(String id, Article updatedArticle) {
-        return articleRepository.findById(id).map(existingArticle -> {
-            existingArticle.setTitle(updatedArticle.getTitle());
-            existingArticle.setContent(updatedArticle.getContent());
-            // Mettez à jour d'autres champs si nécessaire
-            return articleRepository.save(existingArticle);
-        }).orElse(null);
-    }
-
-    // Méthode pour supprimer un article par ID
-    public void deleteArticle(String id) {
-        articleRepository.deleteById(id);
-    }
-
-    // Méthode pour rechercher des articles par mot spécifique
-    public List<Article> searchArticles(String keyword) {
-        return articleRepository.findByTitleContainingOrContentContainingOrAuthorContainingOrPublishDateContaining(keyword, keyword, keyword, keyword);
-    }
-
-    // Méthode pour obtenir un article par ID
-    public Optional<Article> getArticleById(String id) {
-        return articleRepository.findById(id);
-    }
 }
